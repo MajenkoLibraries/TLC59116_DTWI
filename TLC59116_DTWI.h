@@ -89,6 +89,8 @@ class TLC59116_DTWI {
         uint8_t _addr;
         uint8_t _begun;
         DTWI *_dtwi;
+        uint8_t _dp;
+        bool _leading;
 
         void writeRegister(uint8_t reg, uint8_t val);
         static const uint8_t pinmap[8];
@@ -98,10 +100,10 @@ class TLC59116_DTWI {
 
     public:
         /*! Create a new TLC59116 board with the default address of 0 */
-        TLC59116_DTWI(DTWI &dtwi) : _addr(0), _begun(0), _dtwi(&dtwi) {}
-        TLC59116_DTWI(DTWI *dtwi) : _addr(0), _begun(0), _dtwi(dtwi) {}
-        TLC59116_DTWI(DTWI &dtwi, uint8_t addr) : _addr(addr), _begun(0), _dtwi(&dtwi) {}
-        TLC59116_DTWI(DTWI *dtwi, uint8_t addr) : _addr(addr), _begun(0), _dtwi(dtwi) {}
+        TLC59116_DTWI(DTWI &dtwi) : _addr(0), _begun(0), _dtwi(&dtwi), _dp(0), _leading(false) {}
+        TLC59116_DTWI(DTWI *dtwi) : _addr(0), _begun(0), _dtwi(dtwi), _dp(0), _leading(false) {}
+        TLC59116_DTWI(DTWI &dtwi, uint8_t addr) : _addr(addr), _begun(0), _dtwi(&dtwi), _dp(0), _leading(false) {}
+        TLC59116_DTWI(DTWI *dtwi, uint8_t addr) : _addr(addr), _begun(0), _dtwi(dtwi), _dp(0), _leading(false) {}
         /*! Initialize the board, set all channels to 0, and apply the default pin mapping */
         void begin();
         /*! Set the channel (0-15) to the given brightness value (0-255) */
@@ -114,5 +116,7 @@ class TLC59116_DTWI {
          * The upper nibble (4 bits) of each byte is the analog channel number for the left-hand digit. The lower nibble is the channel number for the right-hand digit.
          */
         void setPinMapping(const uint8_t *mapping);
+        void setDecimalPoint(uint8_t dp) { _dp = dp & 0x03; }
+        void setLeadingZero(bool l) { _leading = l; }
 };
 #endif

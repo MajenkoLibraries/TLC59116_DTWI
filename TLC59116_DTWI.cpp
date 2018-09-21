@@ -57,7 +57,7 @@ const uint8_t TLC59116_DTWI::numbers[] = {
 
 void TLC59116_DTWI::begin() {
     if (_begun == 0) {
-        _dtwi->beginMaster(DTWI::FQ1MHz);
+        _dtwi->beginMaster(DTWI::FQ400KHz);
         writeRegister(TLC59116_MODE1, 0x01);
         delay(1);
         writeRegister(TLC59116_MODE2, 0x00);
@@ -129,7 +129,7 @@ void TLC59116_DTWI::displayNumber(uint8_t number, uint8_t b) {
     uint8_t tens = (number / 10) % 10;
     uint8_t units = number % 10;
 
-    if (tens == 0) {
+    if (tens == 0 && !_leading) {
         for (int i = 0; i < 8; i++) {
             int seg = _currentPinMapping[i] >> 4;
             this->analogWrite(seg, 0);
@@ -155,6 +155,9 @@ void TLC59116_DTWI::displayNumber(uint8_t number, uint8_t b) {
             this->analogWrite(seg, 0);
         }
     }
+
+    this->analogWrite(_currentPinMapping[7] & 0x0F, _dp & 0x01 ? b : 0);
+    this->analogWrite(_currentPinMapping[7] >> 4, _dp & 0x02 ? b : 0);
 
 }
 

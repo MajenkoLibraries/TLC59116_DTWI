@@ -1,4 +1,16 @@
-tlc59116_dtwi (1.0.0) uecide; urgency=low
+tlc59116-dtwi (1.0.2) uecide; urgency=low
+
+  * Fixed package name
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Thu, 21 Sep 2017 00:15:11 +0100
+
+tlc59116-dtwi (1.0.1) uecide; urgency=low
+
+  * Added build files
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Thu, 21 Sep 2017 00:14:31 +0100
+
+tlc59116-dtwi (1.0.0) uecide; urgency=low
 
   * Initial Import
 
