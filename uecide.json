@@ -1,0 +1,18 @@
+{
+    "name": "TLC59116_DTWI",
+    "provides": "TLC59116_DTWI.h",
+    "license": "LICENSE.md",
+    "readme": "README.md",
+    "description": "TLC59116 I2C LED driver for chipKIT DTWI",
+    "category": "Display",
+    "subcategory": "LED",
+    "maintainer": "Matt Jenkins <matt@majenko.co.uk>",
+    "version": "1.0.4",
+    "family": "pic32",
+    "core": "chipkit",
+    "install": {
+        "examples": "/",
+        "TLC59116_DTWI.cpp": "/",
+        "TLC59116_DTWI.h": "/"
+    }
+}
